@@ -24,7 +24,7 @@ body {
     margin-bottom: 20px;
 }
 
-.edit-btn, .save-btn, .cancel-btn, .reset-btn, .pdf-btn, .view-btn {
+.edit-btn, .save-btn, .cancel-btn, .reset-btn, .pdf-btn, .view-btn, .backup-btn, .restore-btn {
     padding: 10px 20px;
     background-color: #007bff;
     color: white;
@@ -61,6 +61,22 @@ body {
 
 .view-btn:hover {
     background-color: #218838;
+}
+
+.backup-btn {
+    background-color: #17a2b8;
+}
+
+.backup-btn:hover {
+    background-color: #138496;
+}
+
+.restore-btn {
+    background-color: #6c757d;
+}
+
+.restore-btn:hover {
+    background-color: #5a6268;
 }
 
 .edit-btn:hover, .save-btn:hover {

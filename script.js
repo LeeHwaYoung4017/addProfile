@@ -899,6 +899,73 @@ function resetToDefault() {
     }
 }
 
+// 데이터 백업 (JSON 파일로 다운로드)
+function backupData() {
+    try {
+        const data = ProfileData.load();
+        const jsonStr = JSON.stringify(data, null, 2);
+        const blob = new Blob([jsonStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `profile-backup-${new Date().toISOString().split('T')[0]}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        alert('백업 파일이 다운로드되었습니다.');
+    } catch (e) {
+        alert('백업 중 오류가 발생했습니다: ' + e.message);
+        console.error('백업 오류:', e);
+    }
+}
+
+// 데이터 복원 (JSON 파일 업로드)
+function restoreData() {
+    const fileInput = document.getElementById('restoreFileInput');
+    if (fileInput) {
+        fileInput.click();
+    }
+}
+
+// 파일 선택 후 처리
+function handleRestoreFile(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const data = JSON.parse(e.target.result);
+            
+            // 데이터 검증
+            if (!data.profile || !data.projects) {
+                alert('올바른 백업 파일이 아닙니다.');
+                return;
+            }
+            
+            if (confirm('이 백업 파일로 데이터를 복원하시겠습니까?\n\n현재 데이터는 백업으로 저장됩니다.')) {
+                // 현재 데이터를 먼저 백업
+                const currentData = ProfileData.load();
+                ProfileData.save(currentData);
+                
+                // 복원할 데이터 저장
+                ProfileData.save(data);
+                
+                alert('데이터가 복원되었습니다. 페이지를 새로고침합니다.');
+                location.reload();
+            }
+        } catch (e) {
+            alert('파일을 읽는 중 오류가 발생했습니다: ' + e.message);
+            console.error('복원 오류:', e);
+        }
+    };
+    reader.readAsText(file);
+    
+    // 파일 입력 초기화 (같은 파일을 다시 선택할 수 있도록)
+    event.target.value = '';
+}
+
 // 백업 이력 보기
 function showBackupHistory() {
     const backups = ProfileData.getBackups();
