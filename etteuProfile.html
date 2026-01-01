@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - 개발 경력기술서</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container" style="padding-top: 40px;">
+        <div class="profile-section" id="profileSection">
+            <div class="profile-header">
+                <div class="profile-image-container">
+                    <img id="profileImage" src="" alt="Profile" class="profile-image">
+                </div>
+                <div class="profile-info">
+                    <h1 id="profileName">이화영 (이뜨)</h1>
+                    <p id="profileEmail">ghkdud7913@naver.com</p>
+                    <p id="profilePhone" class="contact-info"></p>
+                    <div class="profile-links" id="profileLinks"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="introduceSection">
+            <h2>INTRODUCE</h2>
+            <div id="introduceContent" class="content"></div>
+        </div>
+
+        <div class="section" id="skillSection">
+            <h2>SKILL</h2>
+            <div id="skillContent"></div>
+        </div>
+
+        <div class="section" id="experienceSection">
+            <h2>EXPERIENCE</h2>
+            <div id="experienceContent"></div>
+        </div>
+
+        <div class="section" id="projectSection">
+            <h2>PROJECT</h2>
+            <div id="projectContent"></div>
+        </div>
+
+        <div class="section" id="opensourceSection">
+            <h2>OPEN SOURCE</h2>
+            <div id="opensourceContent"></div>
+        </div>
+
+        <div class="section" id="educationSection">
+            <h2>EDUCATION</h2>
+            <div id="educationContent"></div>
+        </div>
+
+        <div class="section" id="etcSection">
+            <h2>ETC</h2>
+            <div id="etcContent"></div>
+        </div>
+
+        <div class="section" id="articleSection">
+            <h2>ARTICLE</h2>
+            <div id="articleContent"></div>
+        </div>
+
+        <div class="section" id="coverLetterSection">
+            <h2>COVER LETTER</h2>
+            <div id="coverLetterContent"></div>
+        </div>
+
+        <div class="section" id="portfolioSection">
+            <h2>PORTFOLIO</h2>
+            <div id="portfolioContent"></div>
+        </div>
+    </div>
+
+    <!-- 최상단 이동 버튼 -->
+    <button id="scrollToTopBtn" class="scroll-to-top-btn" title="맨 위로">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+    <script>
+        // etteuProfile.html 전용 스크립트 - profile-data.json 파일에서 데이터 로드
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                // profile-data.json 파일 읽기
+                const response = await fetch('profile-data.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                
+                // ProfileData.load()를 임시로 오버라이드하여 JSON 데이터 반환
+                const originalLoad = ProfileData.load;
+                ProfileData.load = function() {
+                    return data;
+                };
+                
+                // 렌더링 실행
+                renderProfile();
+                
+                // 원래 함수 복원 (필요한 경우)
+                // ProfileData.load = originalLoad;
+                
+                // 스크롤 투 탑 초기화
+                initScrollToTop();
+            } catch (error) {
+                console.error('데이터 로드 오류:', error);
+                alert('profile-data.json 파일을 불러오는 중 오류가 발생했습니다.\n\n오류: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>
