@@ -909,8 +909,9 @@ function resetToDefault() {
     const message = '저장된 모든 데이터가 삭제되고 기본 데이터로 초기화됩니다.\n\n개인정보(이름, 이메일, 전화번호 등)도 모두 초기값으로 되돌아갑니다.\n\n⚠️ 주의: 이 작업은 되돌릴 수 없습니다!\n\n정말로 계속하시겠습니까?';
     if (confirm(message)) {
         try {
-            // localStorage 완전 삭제
+            // localStorage 완전 삭제 (모든 관련 데이터)
             localStorage.removeItem('profileData');
+            localStorage.removeItem('profileData_backup'); // 백업 데이터도 삭제
             
             // 기본 데이터 가져오기
             const defaultData = ProfileData.getDefaultData();
@@ -930,8 +931,8 @@ function resetToDefault() {
                 return;
             }
             
-            // 기본 데이터를 localStorage에 저장
-            ProfileData.save(defaultData);
+            // 기본 데이터를 localStorage에 직접 저장 (백업 생성 없이)
+            localStorage.setItem('profileData', JSON.stringify(defaultData));
             
             // 저장 확인
             const saved = localStorage.getItem('profileData');
@@ -1114,41 +1115,109 @@ function downloadPDF() {
         // 버튼들 숨기기
         const headerActions = document.getElementById('headerActions');
         const scrollBtn = document.getElementById('scrollToTopBtn');
+        const backupBtn = document.getElementById('backupBtn');
+        const restoreBtn = document.getElementById('restoreBtn');
+        
         const originalHeaderDisplay = headerActions ? headerActions.style.display : '';
         const originalScrollDisplay = scrollBtn ? scrollBtn.style.display : '';
+        const originalBackupDisplay = backupBtn ? backupBtn.style.display : '';
+        const originalRestoreDisplay = restoreBtn ? restoreBtn.style.display : '';
         
         if (headerActions) headerActions.style.display = 'none';
         if (scrollBtn) scrollBtn.style.display = 'none';
+        if (backupBtn) backupBtn.style.display = 'none';
+        if (restoreBtn) restoreBtn.style.display = 'none';
         
         const element = document.querySelector('.container');
-        const opt = {
-            margin: [10, 10, 10, 10],
-            filename: '이력서.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { 
-                scale: 2, 
-                useCORS: true,
-                logging: false,
-                letterRendering: true
-            },
-            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-            pagebreak: { 
-                mode: ['avoid-all', 'css', 'legacy'],
-                before: '.page-break-before',
-                after: '.page-break-after',
-                avoid: ['.section', '.experience-item', '.project-item', '.education-item', '.etc-item']
-            }
-        };
         
-        html2pdf().set(opt).from(element).save().then(() => {
-            // 복원
-            if (headerActions) headerActions.style.display = originalHeaderDisplay;
-            if (scrollBtn) scrollBtn.style.display = originalScrollDisplay;
-        }).catch(() => {
-            // 에러 시에도 복원
-            if (headerActions) headerActions.style.display = originalHeaderDisplay;
-            if (scrollBtn) scrollBtn.style.display = originalScrollDisplay;
-        });
+        // PDF 생성 전 스타일 조정
+        const originalPadding = element.style.padding;
+        const originalMaxWidth = element.style.maxWidth;
+        const originalWidth = element.style.width;
+        const originalMargin = element.style.margin;
+        const originalBoxSizing = element.style.boxSizing;
+        
+        // A4 용지 너비: 210mm, 여백: 좌우 각 15mm
+        // 사용 가능 너비: 210 - 30 = 180mm
+        // 1mm ≈ 3.779527559px (96 DPI 기준)
+        const a4WidthMm = 210;
+        const marginLeftRight = 15 * 2; // 좌우 여백 합계
+        const usableWidthMm = a4WidthMm - marginLeftRight; // 180mm
+        const usableWidthPx = Math.floor(usableWidthMm * 3.779527559); // 약 680px
+        
+        // 컨테이너 너비 조정 (A4 용지에 맞게)
+        element.style.boxSizing = 'border-box';
+        element.style.padding = '20px';
+        element.style.maxWidth = usableWidthPx + 'px';
+        element.style.width = usableWidthPx + 'px';
+        element.style.margin = '0 auto';
+        
+        // 약간의 지연을 주어 스타일 적용이 완료되도록
+        setTimeout(() => {
+            const opt = {
+                margin: [15, 15, 15, 15], // 여백 균등 조정 (상, 우, 하, 좌)
+                filename: '이력서.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { 
+                    scale: 2, 
+                    useCORS: true,
+                    logging: false,
+                    letterRendering: true,
+                    allowTaint: true,
+                    backgroundColor: '#ffffff'
+                },
+                jsPDF: { 
+                    unit: 'mm', 
+                    format: 'a4', 
+                    orientation: 'portrait',
+                    compress: true
+                },
+                pagebreak: { 
+                    mode: ['avoid-all', 'css', 'legacy'],
+                    before: '.page-break-before',
+                    after: '.page-break-after',
+                    avoid: [
+                        '.section', 
+                        '.experience-item', 
+                        '.project-item', 
+                        '.education-item', 
+                        '.etc-item',
+                        '.article-item',
+                        '.cover-letter-item',
+                        '.portfolio-item',
+                        '.opensource-item',
+                        '.profile-section',
+                        '.skill-category'
+                    ]
+                }
+            };
+            
+            html2pdf().set(opt).from(element).save().then(() => {
+                // 복원
+                element.style.padding = originalPadding;
+                element.style.maxWidth = originalMaxWidth;
+                element.style.width = originalWidth;
+                element.style.margin = originalMargin;
+                element.style.boxSizing = originalBoxSizing;
+                if (headerActions) headerActions.style.display = originalHeaderDisplay;
+                if (scrollBtn) scrollBtn.style.display = originalScrollDisplay;
+                if (backupBtn) backupBtn.style.display = originalBackupDisplay;
+                if (restoreBtn) restoreBtn.style.display = originalRestoreDisplay;
+            }).catch((error) => {
+                // 에러 시에도 복원
+                console.error('PDF 생성 오류:', error);
+                element.style.padding = originalPadding;
+                element.style.maxWidth = originalMaxWidth;
+                element.style.width = originalWidth;
+                element.style.margin = originalMargin;
+                element.style.boxSizing = originalBoxSizing;
+                if (headerActions) headerActions.style.display = originalHeaderDisplay;
+                if (scrollBtn) scrollBtn.style.display = originalScrollDisplay;
+                if (backupBtn) backupBtn.style.display = originalBackupDisplay;
+                if (restoreBtn) restoreBtn.style.display = originalRestoreDisplay;
+                alert('PDF 생성 중 오류가 발생했습니다. 다시 시도해주세요.');
+            });
+        }, 100); // 100ms 지연
     };
     document.head.appendChild(script);
 }

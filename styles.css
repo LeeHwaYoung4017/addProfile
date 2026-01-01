@@ -668,3 +668,40 @@ body {
     }
 }
 
+/* PDF 생성 시 페이지 나누기 개선 */
+@media print {
+    .section {
+        page-break-inside: avoid;
+        break-inside: avoid;
+        margin-bottom: 30px;
+    }
+    
+    .experience-item,
+    .project-item,
+    .education-item,
+    .etc-item,
+    .article-item,
+    .cover-letter-item,
+    .portfolio-item,
+    .opensource-item {
+        page-break-inside: avoid;
+        break-inside: avoid;
+        margin-bottom: 20px;
+    }
+    
+    .profile-section {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+    
+    .skill-category {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+    
+    /* 페이지 시작 시 여백 */
+    .section:first-child {
+        page-break-before: auto;
+    }
+}
+
