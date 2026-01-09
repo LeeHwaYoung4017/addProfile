@@ -1,0 +1,27 @@
+# 운영체제 파일
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 에디터 설정
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 로그 파일
+*.log
+
+# 임시 파일
+*.tmp
+*.temp
+
+# 개인 편집용 파일 (배포에 불필요)
+# edit.html
+# edit.js
+# edit-styles.css
+# index.html
+# view.html
+# extract-profile-data.html
+
