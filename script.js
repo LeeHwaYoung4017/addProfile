@@ -57,9 +57,9 @@ const ProfileData = {
         return {
             profile: {
                 image: '',
-                name: '이화영',
-                email: 'ghkdud7913@naver.com',
-                phone: '010-3360-6699',
+                name: '이름',
+                email: '이메일',
+                phone: '',
                 links: {
                     line: '',
                     github: '',
@@ -71,180 +71,61 @@ const ProfileData = {
                 enabled: true
             },
             introduce: {
-                content: '새로운 도전에 긍정적인 개발자입니다. 7년 이상의 SI 개발 경험을 바탕으로 다양한 프로젝트에서 백엔드 및 웹 개발을 담당해왔습니다. Spring Framework, 전자정부 프레임워크 기반의 시스템 개발과 유지보수에 전문성을 가지고 있으며, 최근에는 React.js와 Spring Boot를 활용한 프론트-백엔드 통합 개발 경험도 쌓아왔습니다.',
+                content: '새로운 도전에 긍정적인 개발자입니다. 다양한 프로젝트에서 백엔드 및 웹 개발을 담당해왔습니다. Spring Framework 기반의 시스템 개발과 유지보수에 전문성을 가지고 있으며, 최근에는 React.js와 Spring Boot를 활용한 프론트-백엔드 통합 개발 경험도 쌓아왔습니다.',
                 enabled: true
             },
             skills: [
                 {
                     category: 'Languages',
-                    items: ['Java', 'JavaScript', 'JSP', 'PHP', 'Python', 'HTML/CSS', 'Lua Script'],
+                    items: ['Java', 'JavaScript', 'Python', 'HTML/CSS'],
                     enabled: true
                 },
                 {
                     category: 'Frameworks & Libraries',
-                    items: ['Spring', 'Spring Boot', 'Spring Framework', 'React.js', 'React Native', 'Node.js', 'jQuery', 'Thymeleaf', 'MyBatis', 'Chart.js', 'Highcharts.js'],
+                    items: ['Spring Boot', 'React.js', 'Node.js'],
                     enabled: true
                 },
                 {
-                    category: 'Infrastructure & Databases',
-                    items: ['Linux', 'Windows', 'MySQL', 'MariaDB', 'MSSQL', 'Oracle', 'PostgreSQL', 'MongoDB', 'Redis', 'DBMS', 'AWS'],
+                    category: 'Databases',
+                    items: ['MySQL', 'PostgreSQL'],
                     enabled: true
                 },
                 {
-                    category: 'Tools & IDEs',
-                    items: ['Git', 'Eclipse', 'IntelliJ IDEA', '전자정부표준프레임워크'],
-                    enabled: true
-                },
-                {
-                    category: 'Skills',
-                    items: ['SI개발', 'HTTP', '서버관리', '웹개발', '시스템 유지보수', 'SAP RFC (JCO)', 'Redis 대용량 처리'],
+                    category: 'Tools',
+                    items: ['Git', 'IntelliJ IDEA'],
                     enabled: true
                 }
             ],
             experiences: [
                 {
-                    startDate: '2025-10-01',
-                    endDate: '2025-12-31',
+                    startDate: '2024-01-01',
+                    endDate: '2024-12-31',
                     isCurrent: false,
                     employmentType: '정규직',
-                    period: '2025. 10 ~ 2025. 12',
-                    company: '코웨이',
-                    duration: '3개월',
-                    role: 'Sales팀 과장',
-                    description: '* SAP RFC를 이용한 개인정보 고도화 작업\n* 프로젝트 산출물 작성',
-                    skills: ['HTTP', 'SI개발', '서버관리', 'SAP RFC', 'JAVA', 'JSP'],
-                    enabled: true
-                },
-                {
-                    startDate: '2024-11-01',
-                    endDate: '2025-10-31',
-                    isCurrent: false,
-                    employmentType: '정규직',
-                    period: '2024. 11 ~ 2025. 10',
-                    company: '티지소프트주식회사',
+                    period: '2024. 01 ~ 2024. 12',
+                    company: '예시 회사명',
                     duration: '1년',
-                    role: 'SI개발 대리',
-                    description: '* 차세대 전력정보시스템 업무개선 개발 및 비계량평가시스템 개발 참여\n* 전자정부 프레임워크 기반 백엔드 로직 설계 및 구현\n* 산출물 문서화 및 테스트 수행',
-                    skills: ['SI개발', 'HTTP', '서버관리', '전자정부프레임워크', 'Java', 'MariaDB', 'JavaScript'],
-                    enabled: true
-                },
-                {
-                    startDate: '2024-04-01',
-                    endDate: '2024-09-30',
-                    isCurrent: false,
-                    employmentType: '정규직',
-                    period: '2024. 04 ~ 2024. 09',
-                    company: '주식회사닉스앤블루',
-                    duration: '6개월',
-                    role: '기술연구소 주임/계장',
-                    description: '* 금형 MES 시스템 및 이미지 AI 시스템 개발\n* Spring Boot, React.js 기반의 프론트-백엔드 통합 개발\n* Chart.js를 이용한 데이터 시각화 처리',
-                    skills: ['웹개발', 'Spring Boot', 'React.js', 'Chart.js', 'JavaScript', 'PostgreSQL', 'Java'],
-                    enabled: true
-                },
-                {
-                    startDate: '2023-10-01',
-                    endDate: '2024-04-30',
-                    isCurrent: false,
-                    employmentType: '정규직',
-                    period: '2023. 10 ~ 2024. 04',
-                    company: '위캔소프트',
-                    duration: '7개월',
-                    role: 'SI팀 대리',
-                    description: '* 경기신용보증재단 시스템 유지보수 및 신규 개발\n* 보증 관련 웹 화면 및 로직 수정\n* 전문 오류 수정',
-                    skills: ['SI개발', 'Java', 'JSP', 'Oracle', 'JavaScript', 'TrustForm', 'Rexpert'],
-                    enabled: true
-                },
-                {
-                    startDate: '2021-02-01',
-                    endDate: '2023-08-31',
-                    isCurrent: false,
-                    employmentType: '정규직',
-                    period: '2021. 02 ~ 2023. 08',
-                    company: '주식회사서광퍼니처',
-                    duration: '2년 7개월',
-                    role: '온라인팀 사원/팀장',
-                    description: '* 자사몰 홈페이지 화면 및 UI 기능 개선\n* Spring 기반 웹 프레임워크 적용 및 유지보수\n* 모바일 웹 환경 최적화 및 브라우저 호환성 개선',
-                    skills: ['웹개발', '마케팅', 'Spring', 'JavaScript', 'Oracle', 'Java'],
-                    enabled: true
-                },
-                {
-                    startDate: '2020-07-01',
-                    endDate: '2020-09-30',
-                    isCurrent: false,
-                    employmentType: '정규직',
-                    period: '2020. 07 ~ 2020. 09',
-                    company: '(주)동녘',
-                    duration: '3개월',
-                    role: '시스템개발팀 사원',
-                    description: '* 기상청 취약계층 생활정보 문자 시스템 유지보수\n* 통계 웹 페이지 UI 구현 및 PHP-Java 기반 서버 개발\n* MySQL, MSSQL 기반 데이터 수집-가공-시각화 기능 구현',
-                    skills: ['서버관리', 'SI개발', 'Java', 'JSP', 'PHP', 'MySQL', 'MSSQL', 'Spring', 'MyBatis', 'JavaScript'],
-                    enabled: true
-                },
-                {
-                    startDate: '2017-08-01',
-                    endDate: '2019-09-30',
-                    isCurrent: false,
-                    employmentType: '정규직',
-                    period: '2017. 08 ~ 2019. 09',
-                    company: '주식회사파스컴',
-                    duration: '2년 2개월',
-                    role: '사원',
-                    description: '* 음향 관련 웹 시스템 개발 및 유지보수\n* Java, JSP 기반 웹 페이지 개발 및 데이터베이스 연동',
-                    skills: ['웹개발', 'Java', 'JSP', 'Oracle', 'JavaScript'],
+                    role: '백엔드 개발자',
+                    description: '* 웹 애플리케이션 개발 및 유지보수\n* API 설계 및 구현\n* 데이터베이스 설계 및 최적화',
+                    skills: ['Java', 'Spring Boot', 'MySQL', 'RESTful API'],
                     enabled: true
                 }
             ],
             projects: [
                 {
-                    name: '영업정보시스템 고도화',
-                    period: '2025. 10 ~ 2025. 12',
-                    client: '코웨이',
-                    description: 'SAP RFC를 JCO(Java Connector)를 활용하여 SAP 시스템과 연동 구현\n개인정보 처리 프로세스 고도화 및 보안 강화\n프로젝트 산출물 작성 및 문서화',
-                    skills: ['SAP RFC', 'Java', 'HTTP', 'SI개발', 'JCO'],
+                    name: '예시 프로젝트 1',
+                    period: '2024. 01 ~ 2024. 06',
+                    client: '예시 고객사',
+                    description: '웹 애플리케이션 개발\n* 백엔드 API 개발\n* 프론트엔드 UI 구현\n* 데이터베이스 설계',
+                    skills: ['Java', 'Spring Boot', 'React.js', 'MySQL'],
                     links: [],
                     enabled: true
                 },
                 {
-                    name: '차세대 전력정보 시스템 업무개선 개발 - 비계량 평가 시스템',
-                    period: '2025.06~2025.09',
-                    client: '한국전력',
-                    description: '전자정부 표준프레임워크 기반 백엔드 로직 설계 및 구현\n비계량평가시스템 개발 참여 및 데이터 처리 로직 구현\nMyBatis를 활용한 데이터베이스 연동 및 쿼리 최적화',
-                    skills: ['전자정부프레임워크', 'Java', 'MariaDB', 'JavaScript', 'MyBatis'],
-                    links: [],
-                    enabled: true
-                },
-                {
-                    name: '차세대 전력정보시스템 업무개선 개발 - 성과관리 시스템',
-                    period: '2024. 11 ~ 2025. 06',
-                    client: '한국전력',
-                    description: 'Spring Boot와 React.js를 활용한 풀스택 웹 애플리케이션 개발\nRESTful API 설계 및 프론트-백엔드 통합 개발\nChart.js를 이용한 실시간 데이터 시각화 및 대시보드 구현',
-                    skills: ['Spring Boot', 'React.js', 'Chart.js', 'JavaScript', 'PostgreSQL', 'Java'],
-                    links: [],
-                    enabled: true
-                },
-                {
-                    name: '보증관련시스템 개발/운영',
-                    period: '2023. 10 ~ 2024. 04',
-                    client: '경기신용보증재단',
-                    description: '',
-                    skills: ['Java', 'JSP', 'Oracle', 'JavaScript', 'TrustForm', 'Rexpert'],
-                    links: [],
-                    enabled: true
-                },
-                {
-                    name: '자사몰 모바일 인식 UI 화면 구축',
-                    period: '2021. 02 ~ 2023. 08',
-                    description: '',
-                    skills: ['Spring', 'JavaScript', 'Oracle', 'Java', 'jQuery', 'HTML/CSS'],
-                    links: [],
-                    enabled: true
-                },
-                {
-                    name: '취약계층 생활정보 문자시스템 구현',
-                    period: '2020. 07 ~ 2020. 09',
-                    client: '기상청',
-                    description: '',
-                    skills: ['Java', 'JSP', 'PHP', 'MySQL', 'MSSQL', 'Spring', 'MyBatis', 'JavaScript'],
+                    name: '예시 프로젝트 2',
+                    period: '2023. 07 ~ 2023. 12',
+                    description: '시스템 유지보수 및 기능 개선',
+                    skills: ['Java', 'JavaScript', 'Oracle'],
                     links: [],
                     enabled: true
                 }
@@ -252,15 +133,9 @@ const ProfileData = {
             opensources: [],
             educations: [
                 {
-                    period: '2024. 11 ~ 2026. 02',
-                    school: '학점은행제',
-                    major: '컴퓨터공학과 재학중',
-                    enabled: true
-                },
-                {
-                    period: '2017. 03 ~ 2019. 02',
-                    school: '백석예술대학',
-                    major: '경영행정과 졸업',
+                    period: '2020. 03 ~ 2024. 02',
+                    school: '예시 대학교',
+                    major: '컴퓨터공학과 졸업',
                     enabled: true
                 }
             ],
@@ -923,8 +798,8 @@ function resetToDefault() {
                 return;
             }
             
-            // 각 프로젝트의 description 확인
-            const invalidProjects = defaultData.projects.filter(proj => !proj.description || typeof proj.description !== 'string');
+            // 각 프로젝트의 description 확인 (빈 문자열도 허용)
+            const invalidProjects = defaultData.projects.filter(proj => proj.description === undefined || proj.description === null || typeof proj.description !== 'string');
             if (invalidProjects.length > 0) {
                 alert('오류: 기본 데이터의 프로젝트 설명이 유효하지 않습니다.');
                 console.error('유효하지 않은 프로젝트:', invalidProjects);
