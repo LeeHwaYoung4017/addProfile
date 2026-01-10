@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>편집 - 개발 경력기술서</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="edit-styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header-actions">
+            <button id="saveBtn" class="save-btn">저장하기</button>
+            <button id="cancelBtn" class="cancel-btn">취소</button>
+        </div>
+
+        <!-- 프로필 편집 -->
+        <div class="edit-section">
+            <h2>프로필 정보</h2>
+            <div class="form-group">
+                <label>프로필 사진 URL:</label>
+                <input type="text" id="editProfileImage" placeholder="이미지 URL">
+                <input type="file" id="editProfileImageFile" accept="image/*">
+                <div id="imageCropContainer" style="display: none; margin-top: 20px;">
+                    <div class="crop-preview-container">
+                        <div class="crop-preview-wrapper">
+                            <img id="cropPreviewImage" style="max-width: 100%; display: block;">
+                            <div id="cropOverlay" class="crop-overlay"></div>
+                        </div>
+                    </div>
+                    <div class="crop-controls">
+                        <label>크롭 영역 크기:</label>
+                        <input type="range" id="cropSizeSlider" min="50" max="200" value="150" style="width: 200px; margin: 0 10px;">
+                        <span id="cropSizeValue">150px</span>
+                        <button type="button" class="apply-crop-btn" onclick="applyImageCrop()">크롭 적용</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>이름:</label>
+                <input type="text" id="editProfileName" placeholder="이름">
+            </div>
+            <div class="form-group">
+                <label>이메일:</label>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-envelope" style="font-size: 18px; color: #666; width: 20px;"></i>
+                    <input type="email" id="editProfileEmail" placeholder="이메일" style="flex: 1;">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>전화번호:</label>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-phone" style="font-size: 18px; color: #666; width: 20px;"></i>
+                    <input type="text" id="editProfilePhone" placeholder="전화번호" style="flex: 1;">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>라인 (Line):</label>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <i class="fab fa-line" style="font-size: 18px; color: #666; width: 20px;"></i>
+                    <input type="text" id="editProfileLine" placeholder="Line ID 또는 URL" style="flex: 1;">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>깃허브 (GitHub):</label>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <i class="fab fa-github" style="font-size: 18px; color: #666; width: 20px;"></i>
+                    <input type="url" id="editProfileGithub" placeholder="https://github.com/username" style="flex: 1;">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>디스코드 (Discord):</label>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <i class="fab fa-discord" style="font-size: 18px; color: #666; width: 20px;"></i>
+                    <input type="text" id="editProfileDiscord" placeholder="Discord 사용자명 또는 URL" style="flex: 1;">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>유튜브 (YouTube):</label>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <i class="fab fa-youtube" style="font-size: 18px; color: #666; width: 20px;"></i>
+                    <input type="url" id="editProfileYoutube" placeholder="https://youtube.com/channel/..." style="flex: 1;">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>페이스북 (Facebook):</label>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <i class="fab fa-facebook" style="font-size: 18px; color: #666; width: 20px;"></i>
+                    <input type="url" id="editProfileFacebook" placeholder="https://fb.com/username" style="flex: 1;">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>인스타그램 (Instagram):</label>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <i class="fab fa-instagram" style="font-size: 18px; color: #666; width: 20px;"></i>
+                    <input type="url" id="editProfileInstagram" placeholder="https://instagram.com/username" style="flex: 1;">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>섹션 활성화:</label>
+                <input type="checkbox" id="editProfileEnabled"> 프로필 섹션 표시
+            </div>
+        </div>
+
+        <!-- INTRODUCE 편집 -->
+        <div class="edit-section">
+            <h2>INTRODUCE</h2>
+            <div class="form-group">
+                <label>내용:</label>
+                <div class="rich-text-editor">
+                    <div class="editor-toolbar">
+                        <button type="button" class="toolbar-btn" onclick="formatText('bold')" title="굵게">B</button>
+                        <button type="button" class="toolbar-btn" onclick="formatText('italic')" title="기울임">I</button>
+                        <button type="button" class="toolbar-btn" onclick="formatText('underline')" title="밑줄">U</button>
+                        <select class="toolbar-select" id="fontSizeSelect" onchange="formatText('fontSize', this.value)">
+                            <option value="">글자 크기</option>
+                            <option value="12px">12px</option>
+                            <option value="14px">14px</option>
+                            <option value="16px">16px</option>
+                            <option value="18px">18px</option>
+                            <option value="20px">20px</option>
+                            <option value="24px">24px</option>
+                        </select>
+                        <select class="toolbar-select" id="fontFamilySelect" onchange="formatText('fontFamily', this.value)">
+                            <option value="">글꼴</option>
+                            <option value="serif">Serif</option>
+                            <option value="sans-serif">Sans-serif</option>
+                            <option value="monospace">Monospace</option>
+                            <option value="cursive">Cursive</option>
+                        </select>
+                        <input type="color" class="toolbar-color" id="fontColorPicker" onchange="formatText('foreColor', this.value)" title="글자 색상">
+                        <input type="color" class="toolbar-color" id="bgColorPicker" onchange="formatText('backColor', this.value)" title="배경 색상">
+                        <button type="button" class="toolbar-btn" onclick="insertSpecialText('date')" title="날짜 삽입">📅</button>
+                        <button type="button" class="toolbar-btn" onclick="insertSpecialText('signature')" title="서명 삽입">✍️</button>
+                    </div>
+                    <div id="editIntroduce" contenteditable="true" class="rich-text-content" style="min-height: 200px; border: 1px solid #ddd; padding: 10px; border-radius: 4px;"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>섹션 활성화:</label>
+                <input type="checkbox" id="editIntroduceEnabled"> INTRODUCE 섹션 표시
+            </div>
+        </div>
+
+        <!-- SKILL 편집 -->
+        <div class="edit-section">
+            <h2>SKILL</h2>
+            <div id="skillEditContainer"></div>
+            <button type="button" class="add-btn" id="addSkillBtn">+ SKILL 카테고리 추가</button>
+            <div class="form-group">
+                <label>섹션 활성화:</label>
+                <input type="checkbox" id="editSkillEnabled"> SKILL 섹션 표시
+            </div>
+        </div>
+
+        <!-- EXPERIENCE 편집 -->
+        <div class="edit-section">
+            <h2>EXPERIENCE</h2>
+            <div id="experienceEditContainer"></div>
+            <button type="button" class="add-btn" id="addExperienceBtn">+ 경력 추가</button>
+            <div class="form-group">
+                <label>섹션 활성화:</label>
+                <input type="checkbox" id="editExperienceEnabled"> EXPERIENCE 섹션 표시
+            </div>
+        </div>
+
+        <!-- PROJECT 편집 -->
+        <div class="edit-section">
+            <h2>PROJECT</h2>
+            <div id="projectEditContainer"></div>
+            <button type="button" class="add-btn" id="addProjectBtn">+ 프로젝트 추가</button>
+            <div class="form-group">
+                <label>섹션 활성화:</label>
+                <input type="checkbox" id="editProjectEnabled"> PROJECT 섹션 표시
+            </div>
+        </div>
+
+        <!-- OPEN SOURCE 편집 -->
+        <div class="edit-section">
+            <h2>OPEN SOURCE</h2>
+            <div id="opensourceEditContainer"></div>
+            <button type="button" class="add-btn" id="addOpensourceBtn">+ 오픈소스 추가</button>
+            <div class="form-group">
+                <label>섹션 활성화:</label>
+                <input type="checkbox" id="editOpensourceEnabled"> OPEN SOURCE 섹션 표시
+            </div>
+        </div>
+
+        <!-- EDUCATION 편집 -->
+        <div class="edit-section">
+            <h2>EDUCATION</h2>
+            <div id="educationEditContainer"></div>
+            <button type="button" class="add-btn" id="addEducationBtn">+ 학력 추가</button>
+            <div class="form-group">
+                <label>섹션 활성화:</label>
+                <input type="checkbox" id="editEducationEnabled"> EDUCATION 섹션 표시
+            </div>
+        </div>
+
+        <!-- ETC 편집 -->
+        <div class="edit-section">
+            <h2>ETC</h2>
+            <div id="etcEditContainer"></div>
+            <button type="button" class="add-btn" id="addEtcBtn">+ 항목 추가</button>
+            <div class="form-group">
+                <label>섹션 활성화:</label>
+                <input type="checkbox" id="editEtcEnabled"> ETC 섹션 표시
+            </div>
+        </div>
+
+        <!-- ARTICLE 편집 -->
+        <div class="edit-section">
+            <h2>ARTICLE</h2>
+            <div id="articleEditContainer"></div>
+            <button type="button" class="add-btn" id="addArticleBtn">+ 아티클 추가</button>
+            <div class="form-group">
+                <label>섹션 활성화:</label>
+                <input type="checkbox" id="editArticleEnabled"> ARTICLE 섹션 표시
+            </div>
+        </div>
+
+        <!-- 자기소개서 편집 -->
+        <div class="edit-section">
+            <h2>COVER LETTER</h2>
+            <div id="coverLetterEditContainer"></div>
+            <button type="button" class="add-btn" id="addCoverLetterBtn">+ 자기소개서 추가</button>
+            <div class="form-group">
+                <label>섹션 활성화:</label>
+                <input type="checkbox" id="editCoverLetterEnabled"> COVER LETTER 섹션 표시
+            </div>
+        </div>
+
+        <!-- 포트폴리오 편집 -->
+        <div class="edit-section">
+            <h2>PORTFOLIO</h2>
+            <div id="portfolioEditContainer"></div>
+            <button type="button" class="add-btn" id="addPortfolioBtn">+ 포트폴리오 추가</button>
+            <div class="form-group">
+                <label>섹션 활성화:</label>
+                <input type="checkbox" id="editPortfolioEnabled"> PORTFOLIO 섹션 표시
+            </div>
+        </div>
+
+        <!-- 섹션 순서 설정 -->
+        <div class="edit-section">
+            <h2>섹션 노출 순서 설정</h2>
+            <div class="form-group">
+                <label>EXPERIENCE 순서:</label>
+                <input type="number" id="sectionOrderExperience" min="1" max="8" value="1" style="width: 80px;">
+            </div>
+            <div class="form-group">
+                <label>PROJECT 순서:</label>
+                <input type="number" id="sectionOrderProject" min="1" max="8" value="2" style="width: 80px;">
+            </div>
+            <div class="form-group">
+                <label>OPEN SOURCE 순서:</label>
+                <input type="number" id="sectionOrderOpensource" min="1" max="8" value="3" style="width: 80px;">
+            </div>
+            <div class="form-group">
+                <label>EDUCATION 순서:</label>
+                <input type="number" id="sectionOrderEducation" min="1" max="8" value="4" style="width: 80px;">
+            </div>
+            <div class="form-group">
+                <label>ETC 순서:</label>
+                <input type="number" id="sectionOrderEtc" min="1" max="8" value="5" style="width: 80px;">
+            </div>
+            <div class="form-group">
+                <label>ARTICLE 순서:</label>
+                <input type="number" id="sectionOrderArticle" min="1" max="8" value="6" style="width: 80px;">
+            </div>
+            <div class="form-group">
+                <label>COVER LETTER 순서:</label>
+                <input type="number" id="sectionOrderCoverLetter" min="1" max="8" value="7" style="width: 80px;">
+            </div>
+            <div class="form-group">
+                <label>PORTFOLIO 순서:</label>
+                <input type="number" id="sectionOrderPortfolio" min="1" max="8" value="8" style="width: 80px;">
+            </div>
+            <p style="font-size: 12px; color: #666; margin-top: 10px;">숫자가 작을수록 먼저 표시됩니다. (1이 가장 먼저)</p>
+        </div>
+    </div>
+
+    <!-- 링크 삽입 모달 -->
+    <div id="linkModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>링크 삽입</h3>
+                <button type="button" class="modal-close" onclick="closeLinkModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>URL:</label>
+                    <input type="url" id="linkModalUrl" placeholder="https://example.com" style="width: 100%; padding: 8px; margin-top: 5px;">
+                    <button type="button" class="paste-btn" onclick="pasteFromClipboard('url')" style="margin-top: 5px; padding: 5px 10px; background: #f0f0f0; border: 1px solid #ddd; border-radius: 4px; cursor: pointer;">
+                        <i class="fas fa-paste"></i> 클립보드에서 붙여넣기
+                    </button>
+                </div>
+                <div class="form-group">
+                    <label>링크 텍스트 (선택사항):</label>
+                    <input type="text" id="linkModalText" placeholder="링크 텍스트를 입력하세요 (비워두면 URL이 표시됩니다)" style="width: 100%; padding: 8px; margin-top: 5px;">
+                    <button type="button" class="paste-btn" onclick="pasteFromClipboard('text')" style="margin-top: 5px; padding: 5px 10px; background: #f0f0f0; border: 1px solid #ddd; border-radius: 4px; cursor: pointer;">
+                        <i class="fas fa-paste"></i> 클립보드에서 붙여넣기
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="cancel-btn" onclick="closeLinkModal()">취소</button>
+                <button type="button" class="save-btn" onclick="insertLinkFromModal()">삽입</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="edit.js"></script>
+</body>
+</html>
+

@@ -17,16 +17,6 @@ desktop.ini
 *.tmp
 *.temp
 
-# 개인 편집용 파일 (배포에 불필요)
-edit.html
-edit.js
-edit-styles.css
-index.html
-view.html
-extract-profile-data.html
-index-deploy.html
-DEPLOY.md
-
 # 개인정보 포함 파일
 etteuProfile.html
 profile-data.json

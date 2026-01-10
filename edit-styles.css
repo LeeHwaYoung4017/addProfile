@@ -1,0 +1,505 @@
+.edit-section {
+    margin-bottom: 40px;
+    padding: 25px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.edit-section h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
+    font-size: 14px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="url"],
+.form-group input[type="file"],
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+/* 모달 스타일 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 0;
+    border: 1px solid #888;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #333;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+    color: #000;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.paste-btn {
+    font-size: 12px;
+}
+
+.paste-btn:hover {
+    background: #e0e0e0 !important;
+}
+
+.form-group input[type="checkbox"] {
+    margin-right: 8px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.add-btn {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.add-btn:hover {
+    background-color: #218838;
+}
+
+.edit-item {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    position: relative;
+}
+
+.edit-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.edit-item-title {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 16px;
+}
+
+.delete-btn {
+    padding: 5px 15px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+.move-btn {
+    padding: 5px 10px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.move-btn:hover:not(:disabled) {
+    background-color: #5a6268;
+}
+
+.move-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.edit-item .form-group {
+    margin-bottom: 15px;
+}
+
+.edit-item .form-group:last-child {
+    margin-bottom: 0;
+}
+
+.skill-category-edit {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+.skill-category-edit-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.skill-items-edit {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.skill-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 12px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.skill-tag-remove {
+    margin-left: 8px;
+    cursor: pointer;
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.skill-input-container {
+    margin-top: 10px;
+}
+
+.skill-input-container input {
+    width: auto;
+    min-width: 200px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.add-skill-btn {
+    padding: 8px 15px;
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.add-skill-btn:hover {
+    background-color: #138496;
+}
+
+.experience-period-inputs {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.experience-period-inputs input {
+    flex: 1;
+}
+
+.experience-period-inputs span {
+    color: #666;
+}
+
+.experience-description-textarea {
+    min-height: 120px;
+}
+
+.project-links-edit,
+.opensource-links-edit {
+    margin-top: 10px;
+}
+
+.link-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.link-item input {
+    flex: 1;
+}
+
+.link-item button {
+    padding: 8px 12px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.add-link-btn {
+    padding: 8px 15px;
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.add-link-btn:hover {
+    background-color: #138496;
+}
+
+/* 이미지 크롭 스타일 */
+.crop-preview-container {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.crop-preview-wrapper {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+}
+
+#cropPreviewImage {
+    max-width: 400px;
+    max-height: 400px;
+    display: block;
+}
+
+.crop-overlay {
+    position: absolute;
+    border: 3px solid #007bff;
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+    pointer-events: auto;
+    cursor: move;
+    border-radius: 50%;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+.crop-overlay::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid #007bff;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.crop-controls {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.crop-controls label {
+    margin: 0;
+}
+
+.crop-controls input[type="range"] {
+    width: 200px;
+}
+
+.apply-crop-btn {
+    padding: 8px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.apply-crop-btn:hover {
+    background-color: #218838;
+}
+
+/* 리치 텍스트 에디터 스타일 */
+.rich-text-editor {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.editor-toolbar {
+    background-color: #f8f9fa;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.toolbar-btn {
+    padding: 6px 12px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.toolbar-btn:hover {
+    background-color: #e9ecef;
+}
+
+.toolbar-select {
+    padding: 6px 8px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background-color: white;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.toolbar-color {
+    width: 40px;
+    height: 30px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 2px;
+}
+
+.rich-text-content {
+    min-height: 200px;
+    padding: 15px;
+    outline: none;
+    background-color: white;
+}
+
+.rich-text-content:focus {
+    outline: 2px solid #007bff;
+    outline-offset: -2px;
+}
+
+.rich-text-content p {
+    margin: 0 0 10px 0;
+}
+
+.rich-text-content p:last-child {
+    margin-bottom: 0;
+}
+
+.rich-text-content ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.rich-text-content li {
+    margin-bottom: 5px;
+}
+
+/* 경력 입력 필드 스타일 */
+.experience-start-date,
+.experience-end-date {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.experience-employment-type {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: white;
+}
+

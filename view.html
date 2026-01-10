@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - 개발 경력기술서</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container" style="padding-top: 40px;">
+        <div class="profile-section" id="profileSection">
+            <div class="profile-header">
+                <div class="profile-image-container">
+                    <img id="profileImage" src="" alt="Profile" class="profile-image">
+                </div>
+                <div class="profile-info">
+                    <h1 id="profileName">이름</h1>
+                    <p id="profileEmail">이메일</p>
+                    <p id="profilePhone" class="contact-info"></p>
+                    <div class="profile-links" id="profileLinks"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="introduceSection">
+            <h2>INTRODUCE</h2>
+            <div id="introduceContent" class="content"></div>
+        </div>
+
+        <div class="section" id="skillSection">
+            <h2>SKILL</h2>
+            <div id="skillContent"></div>
+        </div>
+
+        <div class="section" id="experienceSection">
+            <h2>EXPERIENCE</h2>
+            <div id="experienceContent"></div>
+        </div>
+
+        <div class="section" id="projectSection">
+            <h2>PROJECT</h2>
+            <div id="projectContent"></div>
+        </div>
+
+        <div class="section" id="opensourceSection">
+            <h2>OPEN SOURCE</h2>
+            <div id="opensourceContent"></div>
+        </div>
+
+        <div class="section" id="educationSection">
+            <h2>EDUCATION</h2>
+            <div id="educationContent"></div>
+        </div>
+
+        <div class="section" id="etcSection">
+            <h2>ETC</h2>
+            <div id="etcContent"></div>
+        </div>
+
+        <div class="section" id="articleSection">
+            <h2>ARTICLE</h2>
+            <div id="articleContent"></div>
+        </div>
+
+        <div class="section" id="coverLetterSection">
+            <h2>COVER LETTER</h2>
+            <div id="coverLetterContent"></div>
+        </div>
+
+        <div class="section" id="portfolioSection">
+            <h2>PORTFOLIO</h2>
+            <div id="portfolioContent"></div>
+        </div>
+    </div>
+
+    <!-- 최상단 이동 버튼 -->
+    <button id="scrollToTopBtn" class="scroll-to-top-btn" title="맨 위로">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+    <script>
+        // view.html 전용 스크립트 - 편집 관련 기능 제거
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProfile();
+            initScrollToTop();
+        });
+    </script>
+</body>
+</html>
+
